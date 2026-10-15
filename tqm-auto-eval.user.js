@@ -6,6 +6,8 @@
 // @author       Hermes Agent
 // @match        https://tqm.ustc.edu.cn/index.html*
 // @icon         https://tqm.ustc.edu.cn/favicon.ico
+// @updateURL    https://raw.githubusercontent.com/A1exthegreat/eqm-auto/main/tqm-auto-eval.user.js
+// @downloadURL  https://raw.githubusercontent.com/A1exthegreat/eqm-auto/main/tqm-auto-eval.user.js
 // @grant        none
 // ==/UserScript==
 

@@ -15,9 +15,10 @@
 ## 安装
 
 1. 浏览器安装 [Tampermonkey](https://www.tampermonkey.net/) 或 [Violentmonkey](https://violentmonkey.github.io/) 扩展
-2. 打开 [tqm-auto-eval.user.js](./tqm-auto-eval.user.js) 文件，或复制全部代码
-3. 在 Tampermonkey 中新建脚本，粘贴代码并保存
-4. 确保脚本的 `@match` 范围覆盖 https://tqm.ustc.edu.cn/index.html*
+2. **推荐**：直接访问 [tqm-auto-eval.user.js](https://raw.githubusercontent.com/A1exthegreat/eqm-auto/main/tqm-auto-eval.user.js)，脚本管理器会自动弹出安装页面
+   - 通过 URL 安装后，脚本管理器会自动从 GitHub 检查并提示更新
+   - 若 `raw.githubusercontent.com` 无法访问，可改用 jsDelivr 镜像：[tqm-auto-eval.user.js (jsDelivr)](https://cdn.jsdelivr.net/gh/A1exthegreat/eqm-auto@main/tqm-auto-eval.user.js)
+3. 也可复制全部代码，在 Tampermonkey 中新建脚本粘贴保存（此方式无法自动更新）
 
 ## 使用
 
@@ -100,6 +101,7 @@
 ### v1.1
 
 - 新增多选题自动填写（每组勾选第一项）
+- 支持 GitHub 自动更新（`@updateURL` / `@downloadURL`）
 
 ### v1.0
 
