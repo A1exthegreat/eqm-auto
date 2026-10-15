@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         中科大教学评价自动完成
 // @namespace    https://tqm.ustc.edu.cn
-// @version      1.0
-// @description  自动完成期末评教：单选全选第一项，忽略多余教师/助教
+// @version      1.1
+// @description  自动完成期末评教：单选/多选选第一项，忽略多余教师/助教
 // @author       Hermes Agent
 // @match        https://tqm.ustc.edu.cn/index.html*
 // @icon         https://tqm.ustc.edu.cn/favicon.ico
@@ -108,6 +108,35 @@
             }
         });
         console.log(`[AutoEval] 已填写 ${filled} 组单选题`);
+    }
+
+    /** 填写多选题：每组 checkbox 勾选第一个选项 */
+    function fillCheckboxGroups() {
+        const groups = document.querySelectorAll('.ant-checkbox-group');
+        if (!groups.length) {
+            // 页面没有多选题属正常情况，静默返回
+            return;
+        }
+        let filled = 0;
+        groups.forEach(group => {
+            const firstWrapper = group.querySelector('.ant-checkbox-wrapper');
+            if (firstWrapper) {
+                // 检查这个组内是否已有选项被勾选
+                const checkedBox = group.querySelector('input[type="checkbox"]:checked');
+                if (!checkedBox) {
+                    firstWrapper.click();
+                    filled++;
+                }
+            } else {
+                // fallback：直接点第一个 checkbox
+                const firstCheckbox = group.querySelector('input[type="checkbox"]');
+                if (firstCheckbox && !firstCheckbox.checked) {
+                    firstCheckbox.click();
+                    filled++;
+                }
+            }
+        });
+        console.log(`[AutoEval] 已填写 ${filled} 组多选题`);
     }
 
     /** 清空问答题（仅清空空文本框，非空则跳过——避免覆盖用户手动输入） */
@@ -369,6 +398,8 @@
             console.log(`[AutoEval] → 评价: ${name}`);
             if (checkStop()) return 'stopped';
             fillRadioGroups();
+            if (checkStop()) return 'stopped';
+            fillCheckboxGroups();
             if (checkStop()) return 'stopped';
             clearTextarea();
             await wait(DELAY.CLICK);
